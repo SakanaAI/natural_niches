@@ -4,7 +4,7 @@ This repository contains code for the paper: Improving Model Merging with Natura
 
 Using this repository you can reproduce the results in the image below, which shows that Natural Niches can achieve comparable results to CMA-ES when evolving MNIST classifiers from scratch.
 
-![evolving classifiers from scratch](mnist.png)
+![evolving classifiers from scratch](figure.png)
 
 ## Table of Contents
 
