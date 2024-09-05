@@ -13,10 +13,10 @@ def parse_arguments():
     # Add arguments
     parser.add_argument('--pop_size', type=int, default=20)
     parser.add_argument('--runs', type=int, default=10)
-    parser.add_argument('--store_train_results', action='store_true', default=False)
-    parser.add_argument('--use_crossover', action='store_true', default=True)
-    parser.add_argument('--use_splitpoint', action='store_true', default=True)
-    parser.add_argument('--use_matchmaker', action='store_true', default=True)
+    parser.add_argument('--store_train_results', action='store_true')
+    parser.add_argument('--no_crossover', action='store_false')
+    parser.add_argument('--no_splitpoint', action='store_false')
+    parser.add_argument('--no_matchmaker', action='store_false')
     parser.add_argument('--method', type=str, default="natural_niches",
                         choices=["natural_niches", "ga", "map_elites", "cma_es"])
     parser.add_argument('--total_forward_passes', type=int, default=50000)
@@ -31,17 +31,15 @@ def main():
     file_name = method
 
     if method == "natural_niches":
-        if args.alpha != 1.0:
-            file_name += f"_alpha_{args.alpha}"
-        if not args.use_crossover:
+        if args.no_crossover:
             file_name += "_no_crossover"
-        if not args.use_splitpoint and args.use_crossover:
+        if args.no_splitpoint and not args.no_crossover:
             file_name += "_no_splitpoint"
-        if not args.use_matchmaker and args.use_crossover:
+        if args.no_matchmaker and not args.no_crossover:
             file_name += "_no_matchmaker"
         results = run_natural_niches(**args_dict)
     elif method == "ga":
-        assert not args.use_matchmaker, "GA does not use matchmaker"
+        assert args.no_matchmaker, "GA does not use matchmaker"
         results = run_natural_niches(**args_dict, alpha=0.0)
     elif method == "map_elites":
         results = run_map_elites(args.runs, args.total_forward_passes, args.store_train_results)

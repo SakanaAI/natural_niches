@@ -62,8 +62,9 @@ def update_archive(score: jnp.ndarray, param: jnp.ndarray, archive: jnp.ndarray,
 
 
 def run_natural_niches(runs: int, pop_size: int, total_forward_passes: int, store_train_results: bool,
-                       use_matchmaker: bool, use_crossover: bool, use_splitpoint: bool, alpha: float = 1.0) -> list:
+                       no_matchmaker: bool, no_crossover: bool, no_splitpoint: bool, alpha: float = 1.0) -> list:
     (x_train, y_train), (x_test, y_test) = load_data()
+    use_matchmaker, use_crossover, use_splitpoint = not no_matchmaker, not no_crossover, not no_splitpoint
     results = []
             
     for run in tqdm(range(runs), desc="Runs"):
