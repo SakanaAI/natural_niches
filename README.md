@@ -63,8 +63,13 @@ To visualize the results, open the Jupyter notebook `plotting.ipynb` and run all
 ## Citation
 If you use this code or the ideas from our paper, please cite our work:
 
-@article{paper,
-  
+```latex
+@inproceedings{
+  abrantes2024improving,
+  title={Improving Model Merging with Natural Niches},
+  author={Jo{\~a}o Abrantes and Robert Tjarko Lange and Yujin Tang},
+  booktitle={UniReps: 2nd Edition of the Workshop on Unifying Representations in Neural Models},
+  year={2024},
+  url={https://openreview.net/forum?id=EavQwYUuJp}
 }
-
-
+```
