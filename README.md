@@ -1,8 +1,8 @@
 # Improving Model Merging with Natural Niches
 
-This repository contains code for the paper: Improving Model Merging with Natural Niches. 
+This repository contains code for our GECCO paper: [Improving Model Merging with Natural Niches](https://dl.acm.org/doi/abs/10.1145/3712256.3726329) (arXiv version). 
 
-Using this repository you can reproduce the results in the image below, which shows that Natural Niches can achieve comparable results to CMA-ES when evolving MNIST classifiers from scratch.
+Using this repository you can reproduce the results in the image below, which shows that Natural Niches can achieve comparable results to CMA-ES when evolving MNIST classifiers from scratch, and it is the best method to evolve pre-trained models.
 
 ![evolving classifiers from scratch](figure.png)
 
@@ -42,20 +42,14 @@ python main.py --method <method>
 python main.py --method ga --no_crossover
 ```
 
-## Ablation Studies
+### Running evolution from pre-trained models
+The default is to run evolution from scratch. To start from pre-trained add the `--use_pre_trained` argument.
 
-- **Without Crossover:**
+**Example:** Run the `map_elites` starting from pre-trained models:
 ```sh
-python main.py --method natural_niches --no_crossover
+python main.py --method map_elites --use_pre_trained
 ```
-- **Without Matchmaker:**
-```sh
-python main.py --method natural_niches --no_matchmaker
-```
-- **Without Split-point:**
-```sh
-python main.py --method natural_niches --no_splitpoint
-```
+
 
 ## Displaying results
 To visualize the results, open the Jupyter notebook `plotting.ipynb` and run all the cells.
@@ -63,13 +57,12 @@ To visualize the results, open the Jupyter notebook `plotting.ipynb` and run all
 ## Citation
 If you use this code or the ideas from our paper, please cite our work:
 
-```latex
-@inproceedings{
-  abrantes2024improving,
-  title={Improving Model Merging with Natural Niches},
-  author={Jo{\~a}o Abrantes and Robert Tjarko Lange and Yujin Tang},
-  booktitle={UniReps: 2nd Edition of the Workshop on Unifying Representations in Neural Models},
-  year={2024},
-  url={https://openreview.net/forum?id=EavQwYUuJp}
+```
+@article{sakana2025m2n2,
+  title={Competition and Attraction Improve Model Fusion},
+  author={Abrantes, Jo\~{a}o and Lange, Robert and Tang, Yujin},
+  booktitle={Proceedings of the 2025 genetic and evolutionary computation conference},
+  pages={1217--1225},
+  year={2025}
 }
 ```

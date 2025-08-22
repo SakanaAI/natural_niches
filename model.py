@@ -1,8 +1,10 @@
 import jax
 import jax.numpy as jnp
+from jax.nn import log_softmax
+import optax
 
 
-hidden_dim = 256  # @param
+hidden_dim = 256
 input_dim = 64
 output_dim = 10
 num_params = (1 + input_dim) * hidden_dim + (1 + hidden_dim) * output_dim
@@ -29,7 +31,28 @@ def mlp(params, data):
 
     return x
 
+
 @jax.jit
 def get_acc(logits, labels):
     predicted_labels = jnp.argmax(logits, axis=1)
     return jnp.mean(predicted_labels == labels)
+
+
+def get_loss(params, data, labels):
+    logits = mlp(params, data)
+    log_probs = log_softmax(logits)
+    true_log_probs = jnp.take_along_axis(log_probs, labels[:, None], axis=1)
+    return -jnp.mean(true_log_probs)
+
+
+get_grad = jax.grad(get_loss)
+
+@jax.jit
+def train(params, x, y, lr=0.003, num_epoches=10):
+    opt = optax.adam(lr)
+    opt_state = opt.init(params)
+    for _ in range(num_epoches):
+        grad = get_grad(params, x, y)
+        updates, opt_state = opt.update(grad, opt_state)
+        params = optax.apply_updates(params, updates)
+    return params
