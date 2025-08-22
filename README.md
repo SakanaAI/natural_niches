@@ -1,6 +1,7 @@
-# Improving Model Merging with Natural Niches
+# Competition and Attraction Improve Model Fusion
 
-This repository contains code for our GECCO paper: [Improving Model Merging with Natural Niches](https://dl.acm.org/doi/abs/10.1145/3712256.3726329) (arXiv version). 
+This repository contains code for our GECCO paper: [Competition and Attraction Improve Model Fusion
+](https://dl.acm.org/doi/abs/10.1145/3712256.3726329) (arxiv). 
 
 Using this repository you can reproduce the results in the image below, which shows that Natural Niches can achieve comparable results to CMA-ES when evolving MNIST classifiers from scratch, and it is the best method to evolve pre-trained models.
 
